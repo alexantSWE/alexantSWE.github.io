@@ -1,0 +1,7 @@
+# Normalise line endings; the GitHub Actions runner is Linux.
+* text=auto eol=lf
+
+# Binary assets should never be line-ending-translated.
+*.png binary
+*.jpg binary
+*.woff2 binary
