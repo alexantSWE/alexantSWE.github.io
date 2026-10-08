@@ -1,0 +1,116 @@
+baseURL = "https://alexantSWE.github.io/"
+title = "Alireza Rezaei"
+theme = "handyman"
+
+# Persian is home.
+defaultContentLanguage = "fa"
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+timeZone = "Asia/Tehran"
+
+[pagination]
+  pagerSize = 10
+
+# Only tags are used; drop the default `categories` taxonomy.
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+    noClasses = true
+
+# ---------------------------------------------------------------- languages
+[languages]
+  [languages.fa]
+    locale = "fa-IR"
+    label = "فارسی"
+    title = "علی‌رضا رضایی"
+    contentDir = "content/fa"
+    weight = 1
+    direction = "rtl"
+    [languages.fa.params]
+      description = "دست‌به‌کار سیستم و نرم‌افزار — لینوکس، عیب‌یابی، اتوماسیون"
+
+  [languages.en]
+    locale = "en-US"
+    label = "English"
+    title = "Alireza Rezaei"
+    contentDir = "content/en"
+    weight = 2
+    direction = "ltr"
+    [languages.en.params]
+      description = "OS & software handyman — Linux, troubleshooting, automation"
+
+# ------------------------------------------------------------------- menus
+[languages.fa.menus]
+  [[languages.fa.menus.main]]
+    name = "خانه"
+    pageRef = "/"
+    weight = 10
+  [[languages.fa.menus.main]]
+    name = "خدمات"
+    pageRef = "/services"
+    weight = 20
+  [[languages.fa.menus.main]]
+    name = "یادداشت‌ها"
+    pageRef = "/notes"
+    weight = 30
+  [[languages.fa.menus.main]]
+    name = "درباره من"
+    pageRef = "/about"
+    weight = 40
+  [[languages.fa.menus.main]]
+    name = "تماس"
+    pageRef = "/contact"
+    weight = 50
+
+[languages.en.menus]
+  [[languages.en.menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+  [[languages.en.menus.main]]
+    name = "Services"
+    pageRef = "/services"
+    weight = 20
+  [[languages.en.menus.main]]
+    name = "Notes"
+    pageRef = "/notes"
+    weight = 30
+  [[languages.en.menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 40
+  [[languages.en.menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 50
+
+# --------------------------------------------------------------- params
+[params]
+  author = "Alireza Rezaei"
+  telegram = "ariresa"
+  github = "alexantSWE"
+  # Hand-picked repos to show on the home page.
+  [[params.repos]]
+    name = "zeemail"
+    url = "https://github.com/alexantSWE/zeemail"
+    desc = "a simple email sender in python, using tkinter as UI"
+  [[params.repos]]
+    name = "iso-mount-kde"
+    url = "https://github.com/alexantSWE/iso-mount-kde"
+    desc = "mount option for ISO files inside the dolphin context menu"
+  [[params.repos]]
+    name = "tsukiyoPDF"
+    url = "https://github.com/alexantSWE/tsukiyoPDF"
+    desc = "super fast PDF reader with dark mode support (Rust)"
+  [[params.repos]]
+    name = "AKalioth"
+    url = "https://github.com/alexantSWE/AKalioth"
+    desc = "shell toolkit fork"

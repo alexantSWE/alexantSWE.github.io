@@ -1,0 +1,14 @@
+{{/* lang-switch.html — flip between fa and en, keeping the same page. */}}
+{{ $other := cond (eq .Site.Language.Lang "fa") "en" "fa" }}
+{{ $label := cond (eq $other "en") "English" "فارسی" }}
+
+{{ if .IsTranslated }}
+  {{ range .Translations }}
+    {{ if eq .Lang $other }}
+      <a class="lang-switch" href="{{ .RelPermalink }}" lang="{{ .Lang }}" hreflang="{{ .Lang }}">{{ $label }}</a>
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{/* Page has no translation yet — land on the other language's home. */}}
+  <a class="lang-switch" href="{{ "/" | relLangURL }}" hreflang="{{ $other }}">{{ $label }}</a>
+{{ end }}

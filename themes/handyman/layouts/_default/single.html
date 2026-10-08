@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{/* _default/single.html — services, about, contact, and note pages. */}}
+<article class="single">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ if eq .Section "notes" }}
+      <p class="note-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+        {{ with .Params.tags }}
+          · {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+        {{ end }}
+      </p>
+    {{ end }}
+  </header>
+
+  <div class="page-content">
+    {{ .Content }}
+  </div>
+
+  {{ if eq .Section "notes" }}
+    <footer class="note-footer">
+      <a href="{{ "notes" | relLangURL }}">← {{ i18n "all_notes" }}</a>
+    </footer>
+  {{ end }}
+</article>
+{{ end }}

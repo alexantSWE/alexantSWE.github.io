@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{/* 404.html */}}
+<section class="hero">
+  <h1>404</h1>
+  <p class="hero-sub">{{ i18n "not_found" }}</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ "/" | relLangURL }}">{{ i18n "back_home" }}</a>
+  </div>
+</section>
+{{ end }}

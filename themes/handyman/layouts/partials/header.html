@@ -1,0 +1,31 @@
+{{/* header.html — site title, main menu, language switch, theme toggle. */}}
+<header class="site-header">
+  <a class="site-title" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
+
+  <nav class="site-nav" id="site-menu" aria-label="{{ i18n "nav_label" }}">
+    <ul>
+      {{ $current := . }}
+      {{ range .Site.Menus.main }}
+        {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+        {{ if not $active }}{{ $active = eq $current.RelPermalink .URL }}{{ end }}
+        <li>
+          <a href="{{ .URL | relLangURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+
+  {{ partial "lang-switch.html" . }}
+  <button class="theme-toggle" type="button" data-theme-toggle
+    data-light-label="{{ i18n "theme_light" }}"
+    data-dark-label="{{ i18n "theme_dark" }}"
+    aria-label="{{ i18n "theme_toggle" }}"
+    aria-pressed="false">
+    <span class="theme-toggle-icon" aria-hidden="true"></span>
+    <span data-theme-label></span>
+  </button>
+  <button class="nav-toggle" type="button" data-nav-toggle
+    aria-controls="site-menu" aria-expanded="false" aria-label="{{ i18n "menu" }}">
+    <span class="nav-toggle-icon" aria-hidden="true"></span>
+  </button>
+</header>

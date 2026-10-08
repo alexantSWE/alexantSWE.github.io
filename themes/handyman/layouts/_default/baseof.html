@@ -1,0 +1,56 @@
+{{/* baseof.html — the shell every page is poured into. */}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale }}" dir="{{ .Site.Language.Direction | default "ltr" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#content">{{ i18n "skip_to_content" }}</a>
+  {{ partial "header.html" . }}
+  <main id="content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  <script>
+    (() => {
+      /* Colour theme. */
+      const themeButton = document.querySelector("[data-theme-toggle]");
+      if (themeButton) {
+        const root = document.documentElement;
+        const label = themeButton.querySelector("[data-theme-label]");
+        const update = () => {
+          const dark = root.dataset.theme === "dark";
+          themeButton.setAttribute("aria-pressed", String(dark));
+          label.textContent = dark ? themeButton.dataset.darkLabel : themeButton.dataset.lightLabel;
+        };
+        update();
+        themeButton.addEventListener("click", () => {
+          root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+          try { localStorage.setItem("theme", root.dataset.theme); } catch (_) {}
+          update();
+        });
+      }
+
+      /* Mobile menu. */
+      const header = document.querySelector(".site-header");
+      const navButton = document.querySelector("[data-nav-toggle]");
+      if (header && navButton) {
+        const nav = document.getElementById(navButton.getAttribute("aria-controls"));
+        const setOpen = (open) => {
+          header.toggleAttribute("data-nav-open", open);
+          navButton.setAttribute("aria-expanded", String(open));
+        };
+        navButton.addEventListener("click", () => setOpen(!header.hasAttribute("data-nav-open")));
+        if (nav) {
+          nav.addEventListener("click", (event) => {
+            if (event.target.closest("a")) setOpen(false);
+          });
+        }
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") setOpen(false);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

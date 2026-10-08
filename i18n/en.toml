@@ -1,0 +1,149 @@
+[nav_label]
+other = "Main navigation"
+
+[menu]
+other = "Menu"
+
+[skip_to_content]
+other = "Skip to content"
+
+[hero_kicker]
+other = "LINUX · SOFTWARE · AUTOMATION"
+
+[hero_title]
+other = "For when technology gets stuck."
+
+[hero_sub]
+other = "I’m Alireza. I offer practical help with everyday Linux, operating-system, and software problems: find the cause, make the fix, and leave the next time easier where possible."
+
+[hero_note_label]
+other = "Availability"
+
+[hero_note]
+other = "Small, useful problems are a good place to start."
+
+[cta_contact]
+other = "Message on Telegram"
+
+[cta_services]
+other = "What I can help with"
+
+[services_eyebrow]
+other = "AREAS OF HELP"
+
+[services_heading]
+other = "A steady hand for everyday tech"
+
+[services_intro]
+other = "I focus on the general state of systems and software—the space between “I don’t know where to begin” and “it works now.”"
+
+[service_1]
+other = "Linux & system setup"
+
+[service_1_desc]
+other = "Distribution choice, installation, first setup, drivers, dual boot, and the changes that make a system genuinely usable."
+
+[service_2]
+other = "Software & system troubleshooting"
+
+[service_2_desc]
+other = "Errors, slowdowns, apps that will not launch, broken packages, and settings that stopped behaving overnight."
+
+[service_3]
+other = "Scripts & automation"
+
+[service_3_desc]
+other = "Turning repeat work into small commands and scripts—mostly Bash, sometimes Python."
+
+[service_4]
+other = "Configuration & customization"
+
+[service_4_desc]
+other = "Terminals, keybindings, config files, window managers, and the details that make a system pleasant to use."
+
+[service_5]
+other = "Backups & files"
+
+[service_5_desc]
+other = "Simple, dependable backups; file organization; and an initial look at disk or permission problems."
+
+[service_6]
+other = "Stubborn little jobs"
+
+[service_6_desc]
+other = "Mounting an ISO, restoring a missing menu item, a stuck update, or a config file where one line broke everything."
+
+[see_all_services]
+other = "Service details"
+
+[process_eyebrow]
+other = "HOW I WORK"
+
+[process_heading]
+other = "Keep it straightforward"
+
+[process_1]
+other = "Make the problem clear"
+
+[process_1_desc]
+other = "You explain what happened, what you have tried, and what “fixed” should look like for you."
+
+[process_2]
+other = "Work through it step by step"
+
+[process_2_desc]
+other = "Instead of endless trial and error, we begin with the clues, the logs, and the simplest safe path."
+
+[process_3]
+other = "Leave something useful behind"
+
+[process_3_desc]
+other = "When useful, there will be a short guide or script, so you do not have to begin from zero next time."
+
+[repos_eyebrow]
+other = "PERSONAL PROJECTS"
+
+[repos_heading]
+other = "Things I have made"
+
+[repos_intro]
+other = "A few examples of my interest in small tools, a better desktop experience, and concrete problems."
+
+[latest_notes]
+other = "Latest notes"
+
+[notes_eyebrow]
+other = "NOTES"
+
+[all_notes]
+other = "All notes"
+
+[contact_eyebrow]
+other = "A GOOD PLACE TO START"
+
+[contact_heading]
+other = "Send the problem exactly as it is."
+
+[contact_intro]
+other = "You do not need the technical name for it. Tell me what is not working, what you need to happen, and what you have already tried."
+
+[contact_action]
+other = "Talk on Telegram"
+
+[not_found]
+other = "This page was not found. Like some errors, it is probably hiding somewhere else."
+
+[back_home]
+other = "Back home"
+
+[built_with]
+other = "Built with Hugo; theme and content made by hand."
+
+[theme_toggle]
+other = "Change colour theme"
+
+[theme_light]
+other = "Light"
+
+[theme_dark]
+other = "Dark"

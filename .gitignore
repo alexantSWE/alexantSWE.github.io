@@ -1,0 +1,16 @@
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+# Rebuild fingerprinted assets on build
+assets/css/*.min.css
+
+# Cloudflare wrangler cache (deployment moved to GitHub Pages)
+.wrangler/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

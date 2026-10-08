@@ -1,0 +1,104 @@
+{{ define "main" }}
+{{/* index.html — the front door: hero, services snapshot, repos, latest notes. */}}
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="hero-kicker">{{ i18n "hero_kicker" }}</p>
+    <h1>{{ i18n "hero_title" }}</h1>
+    <p class="hero-sub">{{ i18n "hero_sub" }}</p>
+  </div>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="https://t.me/{{ .Site.Params.telegram }}" rel="noopener">{{ i18n "cta_contact" }} <span aria-hidden="true">↗</span></a>
+    <a class="btn" href="{{ "services" | relLangURL }}">{{ i18n "cta_services" }}</a>
+  </div>
+  <aside class="hero-note" aria-label="{{ i18n "hero_note_label" }}">
+    <span class="status-dot" aria-hidden="true"></span>
+    <p>{{ i18n "hero_note" }}</p>
+  </aside>
+</section>
+
+<section class="home-section services-section">
+  <div class="section-intro">
+    <p class="eyebrow">{{ i18n "services_eyebrow" }}</p>
+    <h2>{{ i18n "services_heading" }}</h2>
+    <p>{{ i18n "services_intro" }}</p>
+  </div>
+  <div class="card-grid">
+    {{ range seq 6 }}
+      {{ $key := printf "service_%d" . }}
+      {{ $description := printf "service_%d_desc" . }}
+      <div class="card">
+        <span class="service-number">{{ printf "%02d" . }}</span>
+        <h3>{{ i18n $key }}</h3>
+        <p>{{ i18n $description }}</p>
+      </div>
+    {{ end }}
+  </div>
+  <p class="section-more">
+    <a href="{{ "services" | relLangURL }}">{{ i18n "see_all_services" }} →</a>
+  </p>
+</section>
+
+<section class="home-section process-section">
+  <div class="section-intro">
+    <p class="eyebrow">{{ i18n "process_eyebrow" }}</p>
+    <h2>{{ i18n "process_heading" }}</h2>
+  </div>
+  <ol class="process-list">
+    {{ range seq 3 }}
+      {{ $title := printf "process_%d" . }}
+      {{ $description := printf "process_%d_desc" . }}
+      <li>
+        <span>{{ printf "%02d" . }}</span>
+        <div><h3>{{ i18n $title }}</h3><p>{{ i18n $description }}</p></div>
+      </li>
+    {{ end }}
+  </ol>
+</section>
+
+{{ with .Site.Params.repos }}
+<section class="home-section work-section">
+  <div class="section-intro">
+    <p class="eyebrow">{{ i18n "repos_eyebrow" }}</p>
+    <h2>{{ i18n "repos_heading" }}</h2>
+    <p>{{ i18n "repos_intro" }}</p>
+  </div>
+  <ul class="repo-list">
+    {{ range . }}
+      <li>
+        <a href="{{ .url }}" rel="noopener" target="_blank">{{ .name }} <span aria-hidden="true">↗</span></a>
+        <span class="repo-desc">{{ .desc }}</span>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ $notes := where .Site.RegularPages "Section" "notes" }}
+{{ if $notes }}
+<section class="home-section">
+  <div class="section-intro compact">
+    <p class="eyebrow">{{ i18n "notes_eyebrow" }}</p>
+    <h2>{{ i18n "latest_notes" }}</h2>
+  </div>
+  <ul class="note-list">
+    {{ range first 5 $notes }}
+      <li>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+  <p class="section-more">
+    <a href="{{ "notes" | relLangURL }}">{{ i18n "all_notes" }} →</a>
+  </p>
+</section>
+{{ end }}
+
+<section class="contact-panel">
+  <p class="eyebrow">{{ i18n "contact_eyebrow" }}</p>
+  <h2>{{ i18n "contact_heading" }}</h2>
+  <p>{{ i18n "contact_intro" }}</p>
+  <a class="btn btn-primary" href="https://t.me/{{ .Site.Params.telegram }}" rel="noopener">{{ i18n "contact_action" }} <span aria-hidden="true">↗</span></a>
+</section>
+{{ end }}
