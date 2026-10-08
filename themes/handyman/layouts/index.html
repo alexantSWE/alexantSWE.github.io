@@ -6,15 +6,18 @@
     <p class="hero-kicker">{{ i18n "hero_kicker" }}</p>
     <h1>{{ i18n "hero_title" }}</h1>
     <p class="hero-sub">{{ i18n "hero_sub" }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://t.me/{{ .Site.Params.telegram }}" rel="noopener">{{ i18n "cta_contact" }} <span aria-hidden="true">↗</span></a>
+      <a class="btn" href="{{ "services" | relLangURL }}">{{ i18n "cta_services" }}</a>
+    </div>
+    <aside class="hero-note" aria-label="{{ i18n "hero_note_label" }}">
+      <span class="status-dot" aria-hidden="true"></span>
+      <p>{{ i18n "hero_note" }}</p>
+    </aside>
   </div>
-  <div class="hero-actions">
-    <a class="btn btn-primary" href="https://t.me/{{ .Site.Params.telegram }}" rel="noopener">{{ i18n "cta_contact" }} <span aria-hidden="true">↗</span></a>
-    <a class="btn" href="{{ "services" | relLangURL }}">{{ i18n "cta_services" }}</a>
+  <div class="hero-visual">
+    {{ partial "terminal.html" . }}
   </div>
-  <aside class="hero-note" aria-label="{{ i18n "hero_note_label" }}">
-    <span class="status-dot" aria-hidden="true"></span>
-    <p>{{ i18n "hero_note" }}</p>
-  </aside>
 </section>
 
 <section class="home-section services-section">
@@ -23,12 +26,16 @@
     <h2>{{ i18n "services_heading" }}</h2>
     <p>{{ i18n "services_intro" }}</p>
   </div>
+  {{ $icons := slice "disk" "bug" "terminal" "sliders" "archive" "wrench" }}
   <div class="card-grid">
-    {{ range seq 6 }}
-      {{ $key := printf "service_%d" . }}
-      {{ $description := printf "service_%d_desc" . }}
+    {{ range $i, $n := seq 6 }}
+      {{ $key := printf "service_%d" $n }}
+      {{ $description := printf "service_%d_desc" $n }}
       <div class="card">
-        <span class="service-number">{{ printf "%02d" . }}</span>
+        <div class="card-top">
+          <span class="service-icon">{{ partial "icon.html" (dict "name" (index $icons $i)) }}</span>
+          <span class="service-number">{{ printf "%02d" $n }}</span>
+        </div>
         <h3>{{ i18n $key }}</h3>
         <p>{{ i18n $description }}</p>
       </div>

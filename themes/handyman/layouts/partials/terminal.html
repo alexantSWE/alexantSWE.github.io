@@ -1,0 +1,23 @@
+{{/* terminal.html — a decorative terminal window for the hero. */}}
+{{/* Commands and output stay in English on purpose: it is code, and it reads the same in both languages. */}}
+<div class="terminal" aria-hidden="true">
+  <div class="terminal-bar">
+    <span class="terminal-dot"></span>
+    <span class="terminal-dot"></span>
+    <span class="terminal-dot"></span>
+    <span class="terminal-title">alireza@linux:~</span>
+  </div>
+  <div class="terminal-body">
+    <div><span class="t-prompt">$</span> <span class="t-cmd">whoami</span></div>
+    <div class="t-out">alireza · linux &amp; software handyman</div>
+    <div class="t-gap"></div>
+    <div><span class="t-prompt">$</span> <span class="t-cmd">systemctl status your-problem</span></div>
+    <div class="t-out">● your-problem.service — somewhere to start</div>
+    <div class="t-warn">Active: failed (Result: unclear)</div>
+    <div class="t-gap"></div>
+    <div><span class="t-prompt">$</span> <span class="t-cmd">./handyman.sh --careful</span></div>
+    <div><span class="t-ok">[ ok ]</span> <span class="t-out">cause found</span></div>
+    <div><span class="t-ok">[ ok ]</span> <span class="t-out">fix applied</span></div>
+    <div><span class="t-ok">[ ok ]</span> <span class="t-out">a note left for next time</span><span class="t-cursor"></span></div>
+  </div>
+</div>
