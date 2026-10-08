@@ -147,3 +147,9 @@ other = "روشن"
 
 [theme_dark]
 other = "تیره"
+
+[rights]
+other = "همهٔ محتوا متعلق به من است."
+
+[no_trackers]
+other = "بدون ردیاب"

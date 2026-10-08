@@ -147,3 +147,9 @@ other = "Light"
 
 [theme_dark]
 other = "Dark"
+
+[rights]
+other = "All content is mine."
+
+[no_trackers]
+other = "No trackers"

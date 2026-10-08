@@ -8,6 +8,8 @@
     {{ end }}
   </div>
   <p class="colophon">
+    <span class="colophon-copy" dir="ltr">© {{ now.Year }} {{ .Site.Title }}</span>
+    — {{ i18n "rights" }} · {{ i18n "no_trackers" }}<br>
     {{ i18n "built_with" . }}
   </p>
 </footer>
