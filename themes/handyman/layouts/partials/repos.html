@@ -1,0 +1,102 @@
+{{/* repos.html — showcase original repositories, most recently active first.
+     Live data comes from the public GitHub API at build time; if that request
+     fails we fall back to the curated list in hugo.toml so the build never breaks.
+     Forks, archived repositories, the site repo itself, and (by default) repos
+     with no description are filtered out. Control it via:
+       params.github, params.reposLimit, params.repoExclude, params.repoPinned */}}
+{{- $site := . -}}
+{{- $user := $site.Site.Params.github -}}
+{{- $limit := $site.Site.Params.reposLimit | default 6 -}}
+{{- $exclude := $site.Site.Params.repoExclude | default slice -}}
+{{- $pinned := $site.Site.Params.repoPinned | default slice -}}
+
+{{- $colors := dict
+  "Python" "#3572A5" "Rust" "#dea584" "C" "#555555" "C++" "#f34b7d"
+  "JavaScript" "#f1e05a" "TypeScript" "#3178c6" "Kotlin" "#A97BFF"
+  "HTML" "#e34c26" "CSS" "#563d7c" "Shell" "#89e051" "Bash" "#89e051"
+  "Go" "#00ADD8" "Zig" "#ec915c" "Jupyter Notebook" "#DA5B0B"
+  "Java" "#b07219" "Lua" "#000080" "Ruby" "#701516" "Nix" "#7e7eff"
+-}}
+
+{{- $headers := dict "Accept" "application/vnd.github+json" "User-Agent" (printf "%s-site" $user) -}}
+{{- with os.Getenv "GITHUB_TOKEN" -}}
+  {{- $headers = merge $headers (dict "Authorization" (printf "Bearer %s" .)) -}}
+{{- end -}}
+
+{{- $url := printf "https://api.github.com/users/%s/repos?per_page=100&sort=pushed&direction=desc" $user -}}
+{{- $items := slice -}}
+{{- with try (resources.GetRemote $url (dict "headers" $headers)) -}}
+  {{- if .Err -}}
+    {{- warnf "repos.html: GitHub API request failed, using the fallback list: %s" .Err -}}
+  {{- else -}}
+    {{- range (.Value.Content | transform.Unmarshal) -}}
+      {{- if and (not .fork) (not .archived) (not (strings.HasSuffix .name ".github.io")) (not (in $exclude .name)) .description -}}
+        {{- $items = $items | append (dict
+              "name" .name
+              "url" .html_url
+              "description" (.description | plainify)
+              "language" (.language | default "")
+              "pushed" (.pushed_at | default "")
+              "stars" (.stargazers_count | default 0)
+            ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Pinned repos first (in the configured order), then the most recent ones. */}}
+{{- $featured := slice -}}
+{{- $seen := slice -}}
+{{- range $pinned -}}
+  {{- $pin := . -}}
+  {{- range $items -}}
+    {{- if and (eq .name $pin) (not (in $seen $pin)) (lt (len $featured) $limit) -}}
+      {{- $featured = $featured | append . -}}
+      {{- $seen = $seen | append $pin -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range $items -}}
+  {{- if and (lt (len $featured) $limit) (not (in $seen .name)) -}}
+    {{- $featured = $featured | append . -}}
+    {{- $seen = $seen | append .name -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Last-resort fallback when the API returned nothing. */}}
+{{- if not $featured -}}
+  {{- range $site.Site.Params.repos -}}
+    {{- if lt (len $featured) $limit -}}
+      {{- $featured = $featured | append (dict "name" .name "url" .url "description" .desc "language" (.language | default "") "pushed" "" "stars" 0) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $featured -}}
+<section class="home-section work-section">
+  <div class="section-intro">
+    <p class="eyebrow">{{ i18n "repos_eyebrow" }}</p>
+    <h2>{{ i18n "repos_heading" }}</h2>
+    <p>{{ i18n "repos_intro" }}</p>
+  </div>
+  <div class="repo-grid">
+    {{- range $featured }}
+    {{- $lang := .language }}
+    <article class="repo-card">
+      <div class="repo-head">
+        <a class="repo-name" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}<span class="repo-arrow" aria-hidden="true">↗</span></a>
+        {{ with $lang }}<span class="repo-lang"><span class="lang-dot" style="--lang: {{ index $colors . | default "#8b9a91" }}"></span>{{ . }}</span>{{ end }}
+      </div>
+      <p class="repo-desc">{{ .description }}</p>
+      <div class="repo-foot">
+        {{ with .pushed }}<span class="repo-updated">{{ i18n "repos_updated" }} <time datetime="{{ (time.AsTime .).Format "2006-01-02" }}">{{ time.AsTime . | time.Format ":date_medium" }}</time></span>{{ end }}
+        {{ if gt (.stars | default 0) 0 }}<span class="repo-stars" title="{{ i18n "repos_stars" }}">★ {{ .stars }}</span>{{ end }}
+      </div>
+    </article>
+    {{- end }}
+  </div>
+  <p class="section-more">
+    <a href="https://github.com/{{ $user }}?tab=repositories" rel="noopener" target="_blank">{{ i18n "all_repos" }} →</a>
+  </p>
+</section>
+{{- end -}}

@@ -107,7 +107,16 @@ other = "PERSONAL PROJECTS"
 other = "Things I have made"
 
 [repos_intro]
-other = "A few examples of my interest in small tools, a better desktop experience, and concrete problems."
+other = "This list is pulled straight from GitHub and ordered by recent activity—original projects only, with forks and archived repositories left out."
+
+[repos_updated]
+other = "Updated"
+
+[repos_stars]
+other = "stars"
+
+[all_repos]
+other = "All repositories on GitHub"
 
 [latest_notes]
 other = "Latest notes"

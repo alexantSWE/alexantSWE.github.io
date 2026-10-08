@@ -43,6 +43,8 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          # Lets the home page fetch repos from the GitHub API at build time.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # configure-pages exposes the correct base URL (project vs. user site).
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 

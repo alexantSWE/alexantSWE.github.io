@@ -63,23 +63,7 @@
   </ol>
 </section>
 
-{{ with .Site.Params.repos }}
-<section class="home-section work-section">
-  <div class="section-intro">
-    <p class="eyebrow">{{ i18n "repos_eyebrow" }}</p>
-    <h2>{{ i18n "repos_heading" }}</h2>
-    <p>{{ i18n "repos_intro" }}</p>
-  </div>
-  <ul class="repo-list">
-    {{ range . }}
-      <li>
-        <a href="{{ .url }}" rel="noopener" target="_blank">{{ .name }} <span aria-hidden="true">↗</span></a>
-        <span class="repo-desc">{{ .desc }}</span>
-      </li>
-    {{ end }}
-  </ul>
-</section>
-{{ end }}
+{{ partial "repos.html" . }}
 
 {{ $notes := where .Site.RegularPages "Section" "notes" }}
 {{ if $notes }}

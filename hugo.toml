@@ -97,20 +97,39 @@ timeZone = "Asia/Tehran"
   author = "Alireza Rezaei"
   telegram = "ariresa"
   github = "alexantSWE"
-  # Hand-picked repos to show on the home page.
+
+  # Home-page "selected work" is pulled live from the GitHub API at build time.
+  # Forks, archived repos, the site repo, and repos without a description are
+  # filtered out automatically; the rest are ordered by most recent activity.
+  reposLimit = 6
+  # Hide specific repositories from the showcase (by name), e.g. ["arch"].
+  repoExclude = ["arch"]
+  # Pin repositories to the top in this order (by name); recency fills the rest.
+  # e.g. ["cbzview", "Yarisugi"]
+  repoPinned = []
+
+  # Curated fallback, only used if the live GitHub request fails.
   [[params.repos]]
-    name = "zeemail"
-    url = "https://github.com/alexantSWE/zeemail"
-    desc = "a simple email sender in python, using tkinter as UI"
+    name = "cbzview"
+    url = "https://github.com/alexantSWE/cbzview"
+    desc = "Fast, local Linux CBZ comic and manga viewer with mmap, PBO streaming, and bicubic screentone anti-aliasing (C)."
+  [[params.repos]]
+    name = "Yarisugi"
+    url = "https://github.com/alexantSWE/Yarisugi"
+    desc = "A Linux-first native proxy toolchain (Rust, early phase)."
+  [[params.repos]]
+    name = "muzzwall"
+    url = "https://github.com/alexantSWE/muzzwall"
+    desc = "A wallpaper changer for Linux, inspired by Muzzei and Peristyle (Python)."
   [[params.repos]]
     name = "iso-mount-kde"
     url = "https://github.com/alexantSWE/iso-mount-kde"
-    desc = "mount option for ISO files inside the dolphin context menu"
+    desc = "An ISO mount option inside the Dolphin context menu (Python)."
   [[params.repos]]
-    name = "tsukiyoPDF"
-    url = "https://github.com/alexantSWE/tsukiyoPDF"
-    desc = "super fast PDF reader with dark mode support (Rust)"
-  [[params.repos]]
-    name = "AKalioth"
-    url = "https://github.com/alexantSWE/AKalioth"
-    desc = "shell toolkit fork"
+    name = "zeemail"
+    url = "https://github.com/alexantSWE/zeemail"
+    desc = "A simple email sender in Python with a Tkinter UI."
+
+# Allow the build to read the GitHub token (for higher API rate limits).
+[security.funcs]
+  getenv = ["^HUGO_", "^CI$", "^GITHUB_TOKEN$"]
