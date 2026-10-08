@@ -36,13 +36,15 @@ content/fa/            Persian content  (served at /)
 content/en/            English content  (served at /en/)
 i18n/                  UI strings per language (fa.toml, en.toml)
 assets/css/main.css    single stylesheet using CSS logical properties
-static/                fonts, favicon.svg, og.png (sharing card)
+static/                fonts, favicons + manifest, og.png / og-en.png (sharing cards)
 layouts/robots.txt     robots.txt with the sitemap URL
 .github/workflows/     GitHub Pages build & deploy
 themes/handyman/
   layouts/_default/    baseof.html, list.html, single.html
   layouts/index.html   home page
-  layouts/partials/    head, header, footer, lang-switch, notes-list
+  layouts/partials/    head, header, footer, schema, terminal, icon,
+                       lang-switch, notes-list, repos
+  layouts/shortcodes/  email.html (renders the contact address)
 ```
 
 ### How RTL works
@@ -65,11 +67,30 @@ switch links them together. Keep `draft: true` until you're ready.
 
 To add a repo to the home page, append to `[[params.repos]]` in `hugo.toml`.
 
+### Contact details
+
+`params.email`, `params.telegram`, and `params.github` in `hugo.toml` drive the
+contact links in the header, footer, and pages. In Markdown, use the
+`{{</* email */>}}` shortcode wherever the address should appear, so it only
+lives in one place.
+
+### Repos on the home page
+
+The "selected work" grid is fetched live from the GitHub API at build time,
+sorted by most recent activity. Forks, archived repos, the site repo itself,
+repos without a description, and anything listed in `params.repoExclude` are
+skipped; `params.repoPinned` pulls specific repos to the front. If the API call
+fails, it falls back to the curated `[[params.repos]]` list. Set a
+`GITHUB_TOKEN` environment variable in CI to avoid API rate limits.
+
 ### Social previews
 
-`static/og.png` is the 1200×630 image shown when a link is shared (for example
-on Telegram). Replace it with a fresh screenshot or card whenever the design
-changes; `static/favicon.svg` is the browser tab icon.
+`static/og.png` is the 1200×630 Persian sharing card (used on Telegram and
+elsewhere); `static/og-en.png` is the English version, and `head.html` picks the
+right one per language. Both are rendered from a small HTML card with headless
+Edge so the Persian text is shaped correctly. The tab icon set is
+`static/favicon.svg` plus PNG fallbacks and `static/site.webmanifest` for
+add-to-home-screen.
 
 ## Deploy — GitHub Pages
 

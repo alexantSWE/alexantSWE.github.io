@@ -28,6 +28,9 @@ other = "Message on Telegram"
 [cta_services]
 other = "What I can help with"
 
+[cta_header]
+other = "Let's talk"
+
 [services_eyebrow]
 other = "AREAS OF HELP"
 

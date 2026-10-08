@@ -2,6 +2,7 @@
 {{/* _default/single.html — services, about, contact, and note pages. */}}
 <article class="single">
   <header class="page-header">
+    {{ with .Params.monogram }}<div class="about-monogram" aria-hidden="true">{{ . }}</div>{{ end }}
     <h1>{{ .Title }}</h1>
     {{ if eq .Section "notes" }}
       <p class="note-meta">

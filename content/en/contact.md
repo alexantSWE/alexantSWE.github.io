@@ -3,7 +3,7 @@ title: "Contact"
 description: "You do not need to explain the problem in technical language to start."
 ---
 
-The quickest way to reach me is [Telegram](https://t.me/ariresa). You can also look through my code, scripts, and small projects on [GitHub](https://github.com/alexantSWE).
+The quickest way to reach me is [Telegram](https://t.me/ariresa). If you do not use Telegram, email works too: {{< email >}}. You can also look through my code, scripts, and small projects on [GitHub](https://github.com/alexantSWE).
 
 To get to a useful answer faster, these three details are enough:
 

@@ -1,0 +1,31 @@
+{{/* schema.html — JSON-LD describing who I am and what I offer (helps search results). */}}
+{{- $base := .Site.BaseURL -}}
+{{- $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" $base)
+  "name" .Site.Params.author
+  "url" $base
+  "email" .Site.Params.email
+  "knowsLanguage" (slice "fa" "en")
+  "knowsAbout" (slice "Linux" "Windows" "Android" "system troubleshooting" "shell scripting" "automation")
+  "sameAs" (slice (printf "https://github.com/%s" .Site.Params.github) (printf "https://t.me/%s" .Site.Params.telegram))
+-}}
+{{- $service := dict
+  "@type" "ProfessionalService"
+  "@id" (printf "%s#service" $base)
+  "name" .Site.Title
+  "description" .Site.Params.description
+  "url" $base
+  "areaServed" (dict "@type" "Place" "name" "Worldwide (remote)")
+  "availableLanguage" (slice "Persian" "English")
+  "provider" (dict "@id" (printf "%s#person" $base))
+-}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" $base)
+  "url" $base
+  "name" .Site.Params.author
+  "inLanguage" (slice "fa" "en")
+  "publisher" (dict "@id" (printf "%s#person" $base))
+-}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $person $service $website) | jsonify | safeJS }}</script>

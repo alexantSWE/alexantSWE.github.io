@@ -1,4 +1,4 @@
-{{/* head.html — meta, sharing cards, icons, styles. Kept deliberately small. */}}
+{{/* head.html — meta, sharing cards, icons, structured data, styles. Kept deliberately small. */}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
@@ -35,16 +35,22 @@
 {{ range .AllTranslations }}{{ if ne .Lang $.Site.Language.Lang }}
 <meta property="og:locale:alternate" content="{{ replace .Site.Language.Locale "-" "_" }}">
 {{ end }}{{ end }}
-<meta property="og:image" content="{{ "og.png" | absURL }}">
+{{ $og := cond (eq .Site.Language.Lang "fa") "og.png" "og-en.png" }}
+<meta property="og:image" content="{{ $og | absURL }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $sharingTitle }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $sharingTitle }}">
 <meta name="twitter:description" content="{{ $description }}">
-<meta name="twitter:image" content="{{ "og.png" | absURL }}">
+<meta name="twitter:image" content="{{ $og | absURL }}">
 
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ "favicon.svg" | relURL }}">
+<link rel="icon" href="{{ "favicon-32.png" | relURL }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+<meta name="theme-color" content="#f4f1e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111715" media="(prefers-color-scheme: dark)">
 
 {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
@@ -52,3 +58,5 @@
 {{ with .OutputFormats.Get "rss" }}
 <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">
 {{ end }}
+
+{{ partial "schema.html" . }}

@@ -66,6 +66,10 @@ timeZone = "Asia/Tehran"
     pageRef = "/about"
     weight = 40
   [[languages.fa.menus.main]]
+    name = "پرسش‌های پرتکرار"
+    pageRef = "/faq"
+    weight = 45
+  [[languages.fa.menus.main]]
     name = "تماس"
     pageRef = "/contact"
     weight = 50
@@ -88,6 +92,10 @@ timeZone = "Asia/Tehran"
     pageRef = "/about"
     weight = 40
   [[languages.en.menus.main]]
+    name = "FAQ"
+    pageRef = "/faq"
+    weight = 45
+  [[languages.en.menus.main]]
     name = "Contact"
     pageRef = "/contact"
     weight = 50
@@ -97,6 +105,7 @@ timeZone = "Asia/Tehran"
   author = "Alireza Rezaei"
   telegram = "ariresa"
   github = "alexantSWE"
+  email = "alexantswe@gmail.com"
 
   # Home-page "selected work" is pulled live from the GitHub API at build time.
   # Forks, archived repos, the site repo, and repos without a description are
